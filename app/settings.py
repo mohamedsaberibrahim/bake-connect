@@ -46,6 +46,8 @@ class Settings(BaseSettings):
     db_base: str = "bake_connect"
     db_echo: bool = False
 
+    # Secret key for JWT
+    SECRET_KEY: str = "ApplicationSecretKey"
 
     @property
     def db_url(self) -> URL:

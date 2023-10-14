@@ -53,7 +53,7 @@ To be added - Explain how to run tests for the BakeConnect application. Include 
 Bake & Connect implementation raodmap steps starting from delivering a minimum viable product, Securing the application. After that, shape it into Production.
 - [ ] Building Minimum viable product
   - [x] Build core setup (Fast API + MySQL connection)
-  - [ ] Create user
+  - [x] Create user + basic authentication
   - [ ] Create baker
   - [ ] Create product
   - [ ] Create order
@@ -61,9 +61,11 @@ Bake & Connect implementation raodmap steps starting from delivering a minimum v
 - [ ] Securing the application
   - [ ] Support authentication using JWT
 - [ ] Shaping into Production
+  - [ ] Adding requirements.txt
   - [ ] Dockerizing the application
   - [ ] Manual deployment on Kubernetes
 - [ ] Making development cycle easier
+  - [ ] Add linting configurations
   - [ ] Covering all modules with unit tests
   - [ ] Adding CI/CD pipeline
   - [ ] Introducing testing environment besides production environment

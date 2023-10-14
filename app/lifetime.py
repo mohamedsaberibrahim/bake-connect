@@ -3,11 +3,9 @@ from typing import Awaitable, Callable
 from fastapi import FastAPI
 from app.settings import settings
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
+from app.db.meta import meta
 
-# from app.models import load_all_models
-import sqlalchemy as sa
-
-meta = sa.MetaData()
+from app.model import load_all_models
 
 def _setup_db(app: FastAPI) -> None:  # pragma: no cover
     """
@@ -28,7 +26,7 @@ def _setup_db(app: FastAPI) -> None:  # pragma: no cover
     app.state.db_session_factory = session_factory
 async def _create_tables() -> None:  # pragma: no cover
     """Populates tables in the database."""
-    # load_all_models()
+    load_all_models()
     engine = create_async_engine(str(settings.db_url))
     async with engine.begin() as connection:
         await connection.run_sync(meta.create_all)
