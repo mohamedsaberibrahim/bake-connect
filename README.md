@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  BakeConnect
+  Bake & Connect
   <br>
 </h1>
 
@@ -52,7 +52,7 @@ To be added - Explain how to run tests for the BakeConnect application. Include 
 ## Implementation roadmap
 Bake & Connect implementation raodmap steps starting from delivering a minimum viable product, Securing the application. After that, shape it into Production.
 - [ ] Building Minimum viable product
-  - [ ] Build core setup (Fast API + MySQL connection)
+  - [x] Build core setup (Fast API + MySQL connection)
   - [ ] Create user
   - [ ] Create baker
   - [ ] Create product
@@ -82,4 +82,4 @@ Bake & Connect implementation raodmap steps starting from delivering a minimum v
   - [ ] Use Terraform to create your Kubernetes cluster and nodes.
 
 ## Design decisions
-- Initial database design tables using [diagram.io](https://app.diagrams.net). ![Alt text](./images/database-design.png "Database design")
+- Initial database design tables using [diagram.io](https://app.diagrams.net). ![Alt text](./static/images/database-design.png "Database design")
