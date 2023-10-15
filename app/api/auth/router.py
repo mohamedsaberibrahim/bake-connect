@@ -40,6 +40,5 @@ async def login(
             detail="Invalid user credentials"
         )
 
-    print("User id: ", user.email)
-    return auth_handler.encode_token(user.email)
+    return auth_handler.encode_token(user.id)
 
