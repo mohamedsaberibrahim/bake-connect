@@ -5,3 +5,4 @@ def load_all_models() -> None:
 
     __import__('app.api.users.models')
     __import__('app.api.bakeries.models')
+    __import__('app.api.products.models')

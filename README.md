@@ -11,7 +11,7 @@
   <a href="#use-cases">Use Cases</a> •
   <a href="#how-to-use">How To Use</a> •
   <a href="#how-to-run-tests">How To run tests</a> •
-  <a href="#roadmap">Implementation roadmap</a> •
+  <a href="#implementation-roadmap">Implementation roadmap</a> •
   <a href="#design">Design decisions</a>
 </p>
 
@@ -53,13 +53,15 @@ To be added - Explain how to run tests for the BakeConnect application. Include 
 Bake & Connect implementation raodmap steps starting from delivering a minimum viable product, Securing the application. After that, shape it into Production.
 - [ ] Building Minimum viable product
   - [x] Build core setup (Fast API + MySQL connection)
-  - [x] Create user + basic JWT authentication
+  - [x] Create user + basic JWT authentication (access token + authenticator)
   - [x] Create bakery
-  - [ ] Create product
+  - [x] Create product
   - [ ] Create order
   - [ ] Mark order as done
+  - [ ] Add all missing GET methods or any other helper method
+  - [ ] Handle validations & missing scenarios
 - [ ] Securing the application
-  - [ ] Completing JWT authentication (Refresh token)
+  - [ ] Completing JWT authentication (Refresh token + forget password)
 - [ ] Shaping into Production
   - [ ] Adding requirements.txt
   - [ ] Dockerizing the application
