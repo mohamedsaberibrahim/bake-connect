@@ -17,6 +17,7 @@ class User(Base):
     id = Column(Integer, nullable=False, primary_key=True)
     name = Column(String(225), nullable=False)  # noqa: WPS432
     email = Column(String(225), nullable=False, unique=True)
+    role = Column(String(50), nullable=False)
     hashed_password = Column(LargeBinary, nullable=False)
     is_active = Column(Boolean, default=False)
 

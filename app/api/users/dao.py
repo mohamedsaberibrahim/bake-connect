@@ -19,7 +19,7 @@ class UserDAO:
 
         :param name: name of a user.
         """
-        self.session.add(user_model(name=user.name, email=user.email, hashed_password=user.hashed_password))
+        self.session.add(user_model(name=user.name, email=user.email, hashed_password=user.hashed_password, role=user.role.value))
 
     async def get_all_users(self, limit: int, offset: int) -> List[user_model]:
         """

@@ -1,9 +1,14 @@
 from pydantic import BaseModel, Field, EmailStr
+from enum import Enum
+
+class UserRole(Enum):
+  MEMBER = 'member'
+  BAKER = 'baker'
 
 class UserBaseSchema(BaseModel):
     email: EmailStr
     name: str
-
+    role: UserRole
 
 class CreateUserSchema(UserBaseSchema):
     hashed_password: str = Field(alias="password")
