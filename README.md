@@ -56,7 +56,7 @@ Bake & Connect implementation raodmap steps starting from delivering a minimum v
   - [x] Create user + basic JWT authentication (access token + authenticator)
   - [x] Create bakery
   - [x] Create product
-  - [ ] Create order
+  - [x] Create order using builder pattern
   - [ ] Mark order as done
   - [ ] Add all missing GET methods or any other helper method
   - [ ] Handle validations & missing scenarios
@@ -87,3 +87,4 @@ Bake & Connect implementation raodmap steps starting from delivering a minimum v
 
 ## Design decisions
 - Initial database design tables using [diagram.io](https://app.diagrams.net). ![Alt text](./static/images/database-design.png "Database design")
+- Simplified database design tables to tackle the MVP using [diagram.io](https://app.diagrams.net). ![Alt text](./static/images/simplified-database-design.png " Simplified Database design")
