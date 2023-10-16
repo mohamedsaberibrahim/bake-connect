@@ -18,7 +18,7 @@ async def create_order(
     user_id = Depends(auth_handler.auth_wrapper)
 ):
     """Processes request to register order account."""
-    order = await order_service.create_order_builder(payload=payload, user_id=user_id)
+    order = order_service.create_order_builder(payload=payload, user_id=user_id)
     await order_dao.create_order_model(order)
     order:order_model = await order_dao.get_order_by_tracking_number(tracking_number=order.tracking_number)
     return order

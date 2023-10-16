@@ -1,9 +1,16 @@
 from pydantic import BaseModel
+from enum import Enum
 
 class OrderBaseSchema(BaseModel):
     payment_method: str
     bakery_id: int
     product_id: int
+
+class OrderStatus(Enum):
+    PENDING = 'pending'
+    BAKING = 'baking'
+    READY = 'ready'
+    FULFILLED = 'fulfilled'
 
 class OrderCreateSchema(OrderBaseSchema):
     user_id: int
