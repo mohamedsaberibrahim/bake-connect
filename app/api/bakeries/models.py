@@ -17,14 +17,14 @@ class Bakery(Base):
     description = Column(String(225), nullable=False)
     logo_url = Column(String(225), nullable=True)
 
-    ForeignKeyConstraint(
-        ['owner_id', 'id'],
-        ['bakery.owner_id', 'user.id'],
-        name="fk_bakery_owner_id"
+    __table_args__ = (
+        UniqueConstraint("brand_name", name="uq_brand_name"),
+        ForeignKeyConstraint(
+            ['owner_id'],
+            ['user.id'],
+            name="fk_bakery_owner_id"
+        ),
     )
-
-    UniqueConstraint("brand_name", name="uq_brand_name")
-    PrimaryKeyConstraint("id", name="pk_bakery_id")
 
     def __repr__(self):
         """Returns string representation of model instance"""

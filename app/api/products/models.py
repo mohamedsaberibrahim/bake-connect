@@ -16,13 +16,13 @@ class Product(Base):
     price = Column(Integer, nullable=False, default=0)
     image_url = Column(String(225), nullable=True)
 
-    ForeignKeyConstraint(
-        ['baker_id', 'id'],
-        ['product.baker_id', 'bakery.id'],
-        name="fk_product_bakery_id"
+    __table_args__ = (
+        ForeignKeyConstraint(
+            ['baker_id'],
+            ['bakery.id'],
+            name="fk_product_bakery_id"
+        ),
     )
-
-    PrimaryKeyConstraint("id", name="pk_product_id")
 
     def __repr__(self):
         """Returns string representation of model instance"""

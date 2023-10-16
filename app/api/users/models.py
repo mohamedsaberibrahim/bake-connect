@@ -16,13 +16,14 @@ class User(Base):
 
     id = Column(Integer, nullable=False, primary_key=True)
     name = Column(String(225), nullable=False)  # noqa: WPS432
-    email = Column(String(225), nullable=False, unique=True)
+    email = Column(String(225), nullable=False)
     role = Column(String(50), nullable=False)
     hashed_password = Column(LargeBinary, nullable=False)
     is_active = Column(Boolean, default=False)
 
-    UniqueConstraint("email", name="uq_user_email")
-    PrimaryKeyConstraint("id", name="pk_user_id")
+    __table_args__ = (
+        UniqueConstraint("email", name="uq_user_email"),
+    )
 
     def __repr__(self):
         """Returns string representation of model instance"""
