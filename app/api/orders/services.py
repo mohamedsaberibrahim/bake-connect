@@ -10,13 +10,21 @@ from app.api.orders.states.pending_order_state import PendingOrderState
 from app.api.orders.states.baking_order_state import BakingOrderState
 from app.api.orders.states.ready_order_state import ReadyOrderState
 from app.api.orders.states.completed_order_state import CompletedOrderState
+from app.api.orders.models import Order as order_model
 
 class OrderService:
     def __init__(self, order_dao: OrderDAO = Depends()) -> None:
         self.builder = Builder()
         self.order_dao = order_dao
 
-    def create_order_builder(self, payload: OrderBaseSchema, user_id: int) -> OrderCreateSchema:
+    async def create_order(self, payload: OrderBaseSchema, user_id: int) -> order_model:
+        order = await self.create_order_builder(payload=payload, user_id=user_id)
+
+        await self.order_dao.create_order_model(order)
+        order:order_model = await self.order_dao.get_order_by_tracking_number(tracking_number=order.tracking_number)
+        return order
+
+    async def create_order_builder(self, payload: OrderBaseSchema, user_id: int) -> order_model:
         self.builder.set_payment_method(payload.payment_method)
         self.builder.set_bakery_id(payload.bakery_id)
         self.builder.set_product_id(payload.product_id)

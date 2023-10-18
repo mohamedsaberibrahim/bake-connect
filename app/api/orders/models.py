@@ -42,5 +42,8 @@ class Order(Base):
             'tracking_number',
             name='uq_order_tracking_number'
         ),
-        {'extend_existing': True}
     )
+
+    def __repr__(self) -> str:
+        """Returns string representation of model instance"""
+        return "<Order {id!r}>".format(id=self.id)

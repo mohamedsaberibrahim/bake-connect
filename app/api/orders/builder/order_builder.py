@@ -1,4 +1,5 @@
 from app.api.orders.schemas import OrderCreateSchema, OrderStatus
+from app.api.orders.models import Order as order_model
 from datetime import datetime
 from random import randint
 
@@ -36,8 +37,8 @@ class Builder:
     def set_finish_baking_at(self) -> None:
         self.finish_baking_at = datetime.now().isoformat()
     
-    def get_order(self) -> OrderCreateSchema:
-        return OrderCreateSchema(
+    def get_order(self) -> order_model:
+        return order_model(
             payment_method=self.payment_method,
             bakery_id=self.bakery_id,
             product_id=self.product_id,

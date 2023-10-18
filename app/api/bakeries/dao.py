@@ -28,6 +28,17 @@ class BakeryDAO:
             owner_id=owner_id
             ))
 
+    async def get_bakery_by_id(self, bakery_id: int) -> bakery_model:
+        """
+        Get specific bakery model.
+
+        :param name: name of bakery instance.
+        :return: bakery models.
+        """
+        query = select(bakery_model).where(bakery_model.id == bakery_id)
+        rows = await self.session.execute(query)
+        return rows.scalars().first()
+
     async def get_all_bakery(self, limit: int, offset: int) -> List[bakery_model]:
         """
         Get all bakery models with limit/offset pagination.
