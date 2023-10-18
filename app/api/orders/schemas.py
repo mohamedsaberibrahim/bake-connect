@@ -7,10 +7,12 @@ class OrderBaseSchema(BaseModel):
     product_id: int
 
 class OrderStatus(Enum):
+    NEW = 'new'
+    CANCELLED = 'cancelled'
     PENDING = 'pending'
     BAKING = 'baking'
     READY = 'ready'
-    FULFILLED = 'fulfilled'
+    COMPLETED = 'completed'
 
 class OrderCreateSchema(OrderBaseSchema):
     user_id: int
@@ -27,3 +29,7 @@ class OrderSchema(OrderBaseSchema):
 class CreatedOrderSchema(OrderBaseSchema):
     id: int
     tracking_number: str
+
+class OrderStateUpdateSchema(BaseModel):
+    state: str
+    updated_at: str

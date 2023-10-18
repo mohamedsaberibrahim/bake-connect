@@ -19,6 +19,7 @@ class Order(Base):
     tracking_number = Column(String(16), nullable=False)
     start_baking_at = Column(DateTime, nullable=False)
     finish_baking_at = Column(DateTime, nullable=False)
+    cancelled_at = Column(DateTime, nullable=True)
 
 
     __table_args__ = (

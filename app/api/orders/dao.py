@@ -42,3 +42,11 @@ class OrderDAO:
             select(order_model).filter(order_model.tracking_number == tracking_number)
         )
         return result.scalars().first()
+
+    async def update_order_model(self, order: order_model) -> None:
+        """
+        Update single order.
+
+        :param order: order model.
+        """
+        self.session.add(order)

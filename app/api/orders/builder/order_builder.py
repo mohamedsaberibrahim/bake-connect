@@ -19,7 +19,7 @@ class Builder:
         self.user_id = user_id
     
     def set_state(self) -> None:
-        self.state = 'pending'
+        self.state = OrderStatus.NEW.value
 
     def set_created_at(self) -> None:
         self.created_at = datetime.now().isoformat()
@@ -28,7 +28,7 @@ class Builder:
         self.updated_at = datetime.now().isoformat()
     
     def set_tracking_number(self) -> None:
-        self.tracking_number = str(randint(1000000000, 9999999999))
+        self.tracking_number = str(randint(10000, 99999))
     
     def set_start_baking_at(self) -> None:
         self.start_baking_at = datetime.now().isoformat()

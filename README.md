@@ -57,7 +57,7 @@ Bake & Connect implementation raodmap steps starting from delivering a minimum v
   - [x] Create bakery
   - [x] Create product
   - [x] Create order using builder pattern
-  - [ ] Mark order as done
+  - [x] Implementing order state flow using state pattern
   - [ ] Add all missing GET methods or any other helper method
   - [ ] Handle validations & missing scenarios
 - [ ] Securing the application
@@ -87,4 +87,5 @@ Bake & Connect implementation raodmap steps starting from delivering a minimum v
 
 ## Design decisions
 - Initial database design tables using [diagram.io](https://app.diagrams.net). ![Alt text](./static/images/database-design.png "Database design")
-- Simplified database design tables to tackle the MVP using [diagram.io](https://app.diagrams.net). ![Alt text](./static/images/simplified-database-design.png " Simplified Database design")
+- Simplified database design tables to tackle the MVP using [diagram.io](https://app.diagrams.net). ![Alt text](./static/images/simplified-database-design.png "Simplified Database design")
+- State machine for order using [diagram.io](https://app.diagrams.net). ![Alt text](./static/images/order-state.png "Order state machine")
