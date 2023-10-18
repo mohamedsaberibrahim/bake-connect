@@ -89,3 +89,10 @@ Bake & Connect implementation raodmap steps starting from delivering a minimum v
 - Initial database design tables using [diagram.io](https://app.diagrams.net). ![Alt text](./static/images/database-design.png "Database design")
 - Simplified database design tables to tackle the MVP using [diagram.io](https://app.diagrams.net). ![Alt text](./static/images/simplified-database-design.png "Simplified Database design")
 - State machine for order using [diagram.io](https://app.diagrams.net). ![Alt text](./static/images/order-state.png "Order state machine")
+
+## Endpoints to-do list
+- [x] PUT /products/{id}
+- [x] DELETE /products/{id}
+- [x] GET /products
+- [ ] GET /bakery/{id}
+- [ ] GET /bakery/{id}/collection-time

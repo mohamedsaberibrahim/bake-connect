@@ -50,3 +50,16 @@ class OrderDAO:
         :param order: order model.
         """
         self.session.add(order)
+
+    async def filter(self, product_id: int) -> List[order_model]:
+        """
+        Get specific order model.
+
+        :param product_id: product_id of order instance.
+        :return: order models.
+        """
+        query = select(order_model)
+        if product_id:
+            query = query.filter(order_model.product_id == product_id)
+        rows = await self.session.execute(query)
+        return rows.scalars().all()

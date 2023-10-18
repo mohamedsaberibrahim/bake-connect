@@ -42,4 +42,5 @@ class Order(Base):
             'tracking_number',
             name='uq_order_tracking_number'
         ),
+        {'extend_existing': True}
     )

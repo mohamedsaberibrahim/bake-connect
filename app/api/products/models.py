@@ -15,6 +15,7 @@ class Product(Base):
     baking_time = Column(Integer, nullable=False)
     price = Column(Integer, nullable=False, default=0)
     image_url = Column(String(225), nullable=True)
+    location = Column(String(225), nullable=True)
 
     __table_args__ = (
         ForeignKeyConstraint(
@@ -22,6 +23,7 @@ class Product(Base):
             ['bakery.id'],
             name="fk_product_bakery_id"
         ),
+        {'extend_existing': True}
     )
 
     def __repr__(self):
