@@ -1,4 +1,5 @@
 import enum
+import os
 from pathlib import Path
 from tempfile import gettempdir
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -34,20 +35,17 @@ class Settings(BaseSettings):
     # Enable uvicorn reloading
     reload: bool = True
 
-    # Current environment
-    environment: str = "dev"
-
     log_level: LogLevel = LogLevel.INFO
     # Variables for the database
-    db_host: str = "localhost"
-    db_port: int = 3306
-    db_user: str = "saber"
-    db_pass: str = "123456789"
-    db_base: str = "bake_connect"
+    db_host: str = os.getenv("DB_HOST", "localhost")
+    db_port: int = os.getenv("DB_PORT", 3306)
+    db_user: str = os.getenv("DB_USER", "root")
+    db_pass: str = os.getenv("DB_PASS", "root")
+    db_base: str = os.getenv("DB_NAME", "bake_connect")
     db_echo: bool = False
 
     # Secret key for JWT
-    SECRET_KEY: str = "ApplicationSecretKey"
+    SECRET_KEY: str = os.getenv("SECRET_KEY", "secret")
 
     @property
     def db_url(self) -> URL:
@@ -56,6 +54,8 @@ class Settings(BaseSettings):
 
         :return: database URL.
         """
+        print(self.db_host, self.db_port, self.db_user, self.db_pass, self.db_base)
+
         return URL.build(
             scheme="mysql+aiomysql",
             host=self.db_host,
