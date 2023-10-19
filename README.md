@@ -62,10 +62,11 @@ Bake & Connect implementation raodmap steps starting from delivering a minimum v
   - [ ] Handle validations & missing scenarios
 - [ ] Securing the application
   - [ ] Completing JWT authentication (Refresh token + forget password)
-- [ ] Shaping into Production
+- [x] Shaping into Production
   - [x] Use dependency management tool [Poetry](https://python-poetry.org/)
   - [x] Dockerizing the application
-  - [ ] Manual deployment on Kubernetes
+  - [x] Manual deployment on Kubernetes [link](http://34.163.86.145/)
+  - [x] Link it with domain without a certificate. [link](http://bake-connect.com/)
 - [ ] Making development cycle easier
   - [x] Add linting configurations
   - [ ] Covering all modules with unit tests
