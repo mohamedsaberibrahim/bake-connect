@@ -7,6 +7,7 @@ from app.db.dependencies import get_db_session
 from app.api.users.models import User as user_model
 from app.api.users.schemas import CreateUserSchema
 
+
 class UserDAO:
     """Class for accessing user table."""
 
@@ -19,7 +20,11 @@ class UserDAO:
 
         :param name: name of a user.
         """
-        self.session.add(user_model(name=user.name, email=user.email, hashed_password=user.hashed_password, role=user.role.value))
+        self.session.add(user_model(name=user.name,
+                                    email=user.email,
+                                    hashed_password=user.hashed_password,
+                                    role=user.role.value
+                                    ))
 
     async def get_all_users(self, limit: int, offset: int) -> List[user_model]:
         """
@@ -53,8 +58,7 @@ class UserDAO:
 
     async def get_user_by_email(
             self,
-            email: str
-        ) -> user_model:
+            email: str) -> user_model:
         """
         Get specific user model.
 
@@ -64,4 +68,3 @@ class UserDAO:
         query = select(user_model).where(user_model.email == email)
         rows = await self.session.execute(query)
         return rows.scalars().first()
-    

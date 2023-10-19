@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 
+
 class ProductBaseSchema(BaseModel):
     name: str
     baking_time: int
@@ -7,9 +8,11 @@ class ProductBaseSchema(BaseModel):
     image_url: str = None
     location: str
 
+
 class ProductSchema(ProductBaseSchema):
     id: int
     baker_id: int
+
 
 class ProductUpdateSchema(BaseModel):
     name: str = None

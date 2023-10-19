@@ -7,6 +7,7 @@ from app.db.meta import meta
 
 from app.model import load_all_models
 
+
 def _setup_db(app: FastAPI) -> None:  # pragma: no cover
     """
     Creates connection to the database.
@@ -24,6 +25,8 @@ def _setup_db(app: FastAPI) -> None:  # pragma: no cover
     )
     app.state.db_engine = engine
     app.state.db_session_factory = session_factory
+
+
 async def _create_tables() -> None:  # pragma: no cover
     """Populates tables in the database."""
     load_all_models()
@@ -33,7 +36,7 @@ async def _create_tables() -> None:  # pragma: no cover
     await engine.dispose()
 
 
-def register_startup_event(app: FastAPI) -> Callable[[], Awaitable[None]]:  # pragma: no cover
+def register_startup_event(app: FastAPI) -> Callable[[], Awaitable[None]]:
     """
     Actions to run on application startup.
 
@@ -55,7 +58,7 @@ def register_startup_event(app: FastAPI) -> Callable[[], Awaitable[None]]:  # pr
     return _startup
 
 
-def register_shutdown_event(app: FastAPI) -> Callable[[], Awaitable[None]]:  # pragma: no cover
+def register_shutdown_event(app: FastAPI) -> Callable[[], Awaitable[None]]:
     """
     Actions to run on application's shutdown.
 
@@ -66,7 +69,7 @@ def register_shutdown_event(app: FastAPI) -> Callable[[], Awaitable[None]]:  # p
     @app.on_event("shutdown")
     async def _shutdown() -> None:  # noqa: WPS430
         await app.state.db_engine.dispose()
-        
+
         pass  # noqa: WPS420
 
     return _shutdown

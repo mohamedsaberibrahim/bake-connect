@@ -7,13 +7,15 @@ from app.db.dependencies import get_db_session
 from app.api.bakeries.models import Bakery as bakery_model
 from app.api.bakeries.schemas import BakeryBaseSchema
 
+
 class BakeryDAO:
     """Class for accessing bakery table."""
 
     def __init__(self, session: AsyncSession = Depends(get_db_session)):
         self.session = session
 
-    async def create_bakery_model(self, bakery: BakeryBaseSchema, owner_id: int) -> None:
+    async def create_bakery_model(self,
+                                  bakery: BakeryBaseSchema, owner_id: int) -> None:
         """
         Add single bakery to session.
 
@@ -26,7 +28,7 @@ class BakeryDAO:
             description=bakery.description,
             logo_url=bakery.logo_url,
             owner_id=owner_id
-            ))
+        ))
 
     async def get_bakery_by_id(self, bakery_id: int) -> bakery_model:
         """
@@ -71,8 +73,7 @@ class BakeryDAO:
 
     async def get_bakery_by_owner_id(
             self,
-            owner_id: int
-        ) -> bakery_model:
+            owner_id: int) -> bakery_model:
         """
         Get specific bakery model.
 
@@ -82,4 +83,3 @@ class BakeryDAO:
         query = select(bakery_model).where(bakery_model.owner_id == owner_id)
         rows = await self.session.execute(query)
         return rows.scalars().first()
-    

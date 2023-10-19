@@ -1,10 +1,8 @@
-from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy import Column
 from sqlalchemy.sql.sqltypes import String, LargeBinary, Boolean, Integer
-from sqlalchemy.sql.schema import UniqueConstraint, PrimaryKeyConstraint
+from sqlalchemy.sql.schema import UniqueConstraint
 from app.db.base import Base
 
-from app.settings import settings
 
 class User(Base):
     """Model for user."""
@@ -26,4 +24,3 @@ class User(Base):
     def __repr__(self):
         """Returns string representation of model instance"""
         return "<User {name!r}>".format(name=self.name)
-    

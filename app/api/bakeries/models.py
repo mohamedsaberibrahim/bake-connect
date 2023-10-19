@@ -1,7 +1,8 @@
 from sqlalchemy import Column
 from app.db.base import Base
-from sqlalchemy.sql.sqltypes import String, LargeBinary, Boolean, Integer
-from sqlalchemy.sql.schema import ForeignKeyConstraint, UniqueConstraint, PrimaryKeyConstraint
+from sqlalchemy.sql.sqltypes import String, Integer
+from sqlalchemy.sql.schema import ForeignKeyConstraint, UniqueConstraint
+
 
 class Bakery(Base):
     """Model for bakery."""

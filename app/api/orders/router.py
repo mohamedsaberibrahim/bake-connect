@@ -1,19 +1,18 @@
-from fastapi import APIRouter, Body, Depends, HTTPException
+from fastapi import APIRouter, Body, Depends
 
-from http import HTTPStatus
-from app.api.orders.schemas import OrderSchema, OrderBaseSchema, CreatedOrderSchema, OrderStateUpdateSchema
-from app.api.orders.dao import OrderDAO
+from app.api.orders.schemas import OrderSchema, OrderBaseSchema, OrderStateUpdateSchema
 from app.api.auth.services import AuthHandler
 from app.api.orders.services import OrderService
 
 router = APIRouter()
 auth_handler = AuthHandler()
 
+
 @router.post('')
 async def create_order(
-    payload: OrderBaseSchema = Body(), 
+    payload: OrderBaseSchema = Body(),
     order_service: OrderService = Depends(),
-    user_id = Depends(auth_handler.auth_wrapper)
+    user_id=Depends(auth_handler.auth_wrapper)
 ):
     """Processes request to register order account."""
     order = await order_service.create_order(payload=payload, user_id=user_id)
@@ -22,11 +21,12 @@ async def create_order(
 
 @router.put('/{tracking_number}/state', response_model=OrderSchema)
 async def update_order_state(
-    tracking_number: str, 
-    payload: OrderStateUpdateSchema = Body(), 
+    tracking_number: str,
+    payload: OrderStateUpdateSchema = Body(),
     order_service: OrderService = Depends(),
-    user_id = Depends(auth_handler.auth_wrapper)
+    user_id=Depends(auth_handler.auth_wrapper)
 ):
     """Processes request to update order state."""
-    order = await order_service.update_order_state(tracking_number=tracking_number, payload=payload, user_id=user_id)
+    order = await order_service.update_order_state(
+        tracking_number=tracking_number, payload=payload, user_id=user_id)
     return order

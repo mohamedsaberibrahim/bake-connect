@@ -7,17 +7,20 @@ from app.api.orders.dao import OrderDAO
 
 
 class ProductService:
-    def __init__(self,
-        product_dao: ProductDAO = Depends(),
-        bakery_dao: BakeryDAO = Depends(),
-        order_dao: OrderDAO = Depends()
+    def __init__(
+            self,
+            product_dao: ProductDAO = Depends(),
+            bakery_dao: BakeryDAO = Depends(),
+            order_dao: OrderDAO = Depends()
     ):
         self.product_dao = product_dao
         self.bakery_dao = bakery_dao
         self.order_dao = order_dao
 
-    async def list_products(self, limit: int = 12, offset: int = 0, name: str = None, location: str = None):
-        products = await self.product_dao.filter(limit=limit, offset=offset, name=name, location=location)
+    async def list_products(self, limit: int = 12, offset: int = 0, name: str = None,
+                            location: str = None):
+        products = await self.product_dao.filter(
+            limit=limit, offset=offset, name=name, location=location)
         return products
 
     async def delete_product(self, product_id, user_id):
@@ -29,8 +32,9 @@ class ProductService:
             )
 
         bakery = await self.bakery_dao.get_bakery_by_owner_id(owner_id=user_id)
-        await self.product_dao.delete_product_model(product_id=product_id, bakery_id=bakery.id)
-        return { 'success': True, 'message': 'Product deleted successfully' }
+        await self.product_dao.delete_product_model(product_id=product_id,
+                                                    bakery_id=bakery.id)
+        return {'success': True, 'message': 'Product deleted successfully'}
 
     async def update_product(self, product_id, payload, user_id):
         bakery = await self.bakery_dao.get_bakery_by_owner_id(owner_id=user_id)
@@ -41,5 +45,6 @@ class ProductService:
                 detail='Product not found'
             )
 
-        await self.product_dao.update_product_model(product_id=product_id, payload=payload)
-        return { 'success': True, 'message': 'Product updated successfully' }
+        await self.product_dao.update_product_model(product_id=product_id,
+                                                    payload=payload)
+        return {'success': True, 'message': 'Product updated successfully'}

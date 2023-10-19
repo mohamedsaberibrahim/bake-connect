@@ -67,7 +67,7 @@ Bake & Connect implementation raodmap steps starting from delivering a minimum v
   - [ ] Dockerizing the application
   - [ ] Manual deployment on Kubernetes
 - [ ] Making development cycle easier
-  - [ ] Add linting configurations
+  - [x] Add linting configurations
   - [ ] Covering all modules with unit tests
   - [ ] Adding CI/CD pipeline
   - [ ] Introducing testing environment besides production environment

@@ -1,4 +1,3 @@
-import os
 import enum
 from pathlib import Path
 from tempfile import gettempdir
@@ -7,6 +6,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 from yarl import URL
 
 TEMP_DIR = Path(gettempdir())
+
 
 class LogLevel(str, enum.Enum):  # noqa: WPS600
     """Possible log levels."""
@@ -36,7 +36,7 @@ class Settings(BaseSettings):
 
     # Current environment
     environment: str = "dev"
-    
+
     log_level: LogLevel = LogLevel.INFO
     # Variables for the database
     db_host: str = "localhost"
@@ -65,11 +65,10 @@ class Settings(BaseSettings):
             path=f"/{self.db_base}",
         )
     model_config = SettingsConfigDict(
-        env_file = ".env",
-        env_prefix = "TEMPLATE2_",
-        env_file_encoding = "utf-8",
+        env_file=".env",
+        env_prefix="APP_",
+        env_file_encoding="utf-8",
     )
-
 
 
 settings = Settings()

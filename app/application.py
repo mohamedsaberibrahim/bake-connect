@@ -1,8 +1,6 @@
 from fastapi import FastAPI
 from fastapi.responses import UJSONResponse
-from app.settings import settings
 from app.router import api_router
-from importlib import metadata
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 
@@ -19,7 +17,7 @@ def get_app() -> FastAPI:
     """
     app = FastAPI(
         title="bakeConnect",
-        version="1.0.0", #  metadata.version("bakeConnect")
+        version="1.0.0",  # metadata.version("bakeConnect")
         docs_url="/api/docs",
         redoc_url="/api/redoc",
         openapi_url="/api/openapi.json",
@@ -28,7 +26,7 @@ def get_app() -> FastAPI:
 
     # Adds static files.
     app.mount("/static", StaticFiles(directory="static"), name="static")
-    
+
     # Adds landing page for the application.
     app.add_api_route("/", endpoint=lambda: FileResponse('static/index.html'))
 

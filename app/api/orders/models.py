@@ -1,7 +1,8 @@
 from sqlalchemy import Column
 from app.db.base import Base
-from sqlalchemy.sql.sqltypes import String, LargeBinary, Boolean, Integer, DateTime
-from sqlalchemy.sql.schema import ForeignKeyConstraint, UniqueConstraint, PrimaryKeyConstraint
+from sqlalchemy.sql.sqltypes import String, Integer, DateTime
+from sqlalchemy.sql.schema import ForeignKeyConstraint, UniqueConstraint
+
 
 class Order(Base):
     """Model for order."""
@@ -20,7 +21,6 @@ class Order(Base):
     start_baking_at = Column(DateTime, nullable=False)
     finish_baking_at = Column(DateTime, nullable=False)
     cancelled_at = Column(DateTime, nullable=True)
-
 
     __table_args__ = (
         ForeignKeyConstraint(

@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List
 
 from fastapi import Depends
 from sqlalchemy import select, update
@@ -7,13 +7,15 @@ from app.db.dependencies import get_db_session
 from app.api.products.models import Product as product_model
 from app.api.products.schemas import ProductBaseSchema
 
+
 class ProductDAO:
     """Class for accessing product table."""
 
     def __init__(self, session: AsyncSession = Depends(get_db_session)):
         self.session = session
 
-    async def create_product_model(self, product: ProductBaseSchema, bakery_id: int) -> None:
+    async def create_product_model(
+            self, product: ProductBaseSchema, bakery_id: int) -> None:
         """
         Add single product to session.
 
@@ -27,7 +29,7 @@ class ProductDAO:
             price=product.price,
             image_url=product.image_url,
             location=product.location
-            ))
+        ))
 
     async def filter(
         self,
@@ -66,12 +68,17 @@ class ProductDAO:
         :param bakery_id: id of baker instance.
         :return: None.
         """
-        result = await self.session.execute(select(product_model).filter(product_model.id == product_id).filter(product_model.baker_id == bakery_id))
+        result = await self.session.execute(
+            select(product_model)
+            .filter(product_model.id == product_id)
+            .filter(product_model.baker_id == bakery_id)
+        )
         product = result.scalars().first()
         await self.session.delete(product)
         # await self.session.commit()
 
-    async def update_product_model(self, product_id: int, payload: ProductBaseSchema) -> None:
+    async def update_product_model(
+            self, product_id: int, payload: ProductBaseSchema) -> None:
         """
         Update specific product model.
 
@@ -90,7 +97,7 @@ class ProductDAO:
             values['price'] = payload.price
         if payload.image_url:
             values['image_url'] = payload.image_url
-        
+
         stmt = (
             update(product_model)
             .where(product_model.id == product_id)

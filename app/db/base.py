@@ -6,4 +6,3 @@ class Base(DeclarativeBase):
     """Base for all models."""
 
     metadata = meta
-

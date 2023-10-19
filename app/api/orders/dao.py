@@ -1,11 +1,11 @@
-from typing import List, Optional
+from typing import List
 
 from fastapi import Depends
 from sqlalchemy import select, insert
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.db.dependencies import get_db_session
 from app.api.orders.models import Order as order_model
-from app.api.orders.schemas import OrderCreateSchema
+
 
 class OrderDAO:
     """Class for accessing order table."""
@@ -55,7 +55,8 @@ class OrderDAO:
         """
         self.session.add(order)
 
-    async def filter(self, product_id: int = None, baker_id: int = None) -> List[order_model]:
+    async def filter(
+            self, product_id: int = None, baker_id: int = None) -> List[order_model]:
         """
         Get specific order model.
 

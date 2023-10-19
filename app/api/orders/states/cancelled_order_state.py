@@ -2,6 +2,7 @@ from app.api.orders.schemas import OrderSchema, OrderStatus
 from app.api.orders.states.base_state import OrderState
 from datetime import datetime
 
+
 class CancelledOrderState(OrderState):
     """Class for cancelled order state."""
 
