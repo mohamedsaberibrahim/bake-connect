@@ -1,0 +1,36 @@
+name: CI/CD
+
+on: push
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      - name: Install deps
+        uses: knowsuchagency/poetry-install@v1
+        env:
+          POETRY_VIRTUALENVS_CREATE: false
+      - name: Run flake8 check
+        run: poetry run flake8 --count .
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      - name: Install deps
+        uses: knowsuchagency/poetry-install@v1
+        env:
+          POETRY_VIRTUALENVS_CREATE: false
+      - name: Run pytest check
+        run: poetry run pytest -vv .
+        env:
+          APP_HOST: "0.0.0.0"
+          APP_DB_HOST: localhost
