@@ -73,7 +73,7 @@ Bake & Connect implementation raodmap steps starting from delivering a minimum v
   - [x] Adding simple CI/CD pipeline
   - [ ] Introducing testing environment besides production environment
   - [ ] Any refactoring is needed here?
-  - [ ] Adding documentation for all endpoints
+  - [x] Adding documentation for all endpoints
 - [ ] Adding any feature de-scoped from MVP or enhancement
   - [ ] Rate baker by user
   - [ ] Structure/Scrape the locations data
@@ -90,3 +90,53 @@ Bake & Connect implementation raodmap steps starting from delivering a minimum v
 - Initial database design tables using [diagram.io](https://app.diagrams.net). ![Alt text](./static/images/database-design.png "Database design")
 - Simplified database design tables to tackle the MVP using [diagram.io](https://app.diagrams.net). ![Alt text](./static/images/simplified-database-design.png "Simplified Database design")
 - State machine for order using [diagram.io](https://app.diagrams.net). ![Alt text](./static/images/order-state.png "Order state machine")
+- Project structure
+```
+fastapi-project
+├── app/
+│   ├── api/
+│   │   ├── users/
+│   │   │   ├── router.py  # exposing endpoints
+│   │   │   ├── dao.py  # class for accessing database covering all sql-alchemy methods
+│   │   │   ├── schemas.py  # pydantic models
+│   │   │   ├── models.py  # db models
+│   │   │   ├── services.py  # service logic lays here
+│   │   └── posts/
+│   │       ├── router.py
+│   │       ├── schemas.py
+│   │       ├── models.py
+│   │       ├── dependencies.py
+│   │       ├── constants.py
+│   │       ├── exceptions.py
+│   │       ├── service.py
+│   │       └── utils.py
+│   ├── models.py  # global models
+│   ├── router.py  # global router
+│   ├── lifetime.py  # application startup - shutdown
+│   ├── application.py  # application initizaliation & configuartion
+│   └── __main__.py
+├── tests/
+│   ├── users
+│   ├── products
+├── static/
+│   ├── index.html
+|   └── style.css
+├── .env
+├── .flake8  # linting rules configurations
+├── .gitignore
+├── pyproject.toml  # poetry dependency configurations management
+└── Dockerfile  # dockerfile for the application
+```
+1. All domain directories inside `app/api` folder
+   1. `app/api/` - highest level of an app, contains common models, configs, and constants, etc.
+   2. `app/api/__main__.py` - root of the project, which inits the FastAPI app
+2. Each package has its own router, schemas, models, etc.
+   1. `router.py` - is a core of each module with all the endpoints
+   2. `schemas.py` - for pydantic models
+   3. `models.py` - for db models
+   4. `service.py` - module specific business logic  
+   5. `dao.py` - for accessing db models using ORM
+   6. `utils.py` - non-business logic functions, e.g. response normalization, data enrichment, etc.
+   7. `exceptions.py` - module specific exceptions, e.g. `PostNotFound`, `InvalidUserData`
+
+
