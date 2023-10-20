@@ -23,6 +23,18 @@ class BakeryService:
     async def create_bakery(self, payload: BakeryBaseSchema,
                             user_id: int) -> BakerySchema:
         """Processes request to register bakery account."""
+        existing_bakery = self.bakery_dao.get_bakery_by_owner_id(owner_id=user_id)
+        if existing_bakery:
+            raise HTTPException(
+                status_code=HTTPStatus.BAD_REQUEST,
+                detail='Bakery already exists'
+            )
+        existing_bakery = self.bakery_dao.filter(name=payload.name)
+        if existing_bakery:
+            raise HTTPException(
+                status_code=HTTPStatus.BAD_REQUEST,
+                detail='Bakery name already exists'
+            )
         await self.bakery_dao.create_bakery_model(bakery=payload, owner_id=user_id)
         bakery = await self.bakery_dao.get_bakery_by_owner_id(owner_id=user_id)
         return bakery

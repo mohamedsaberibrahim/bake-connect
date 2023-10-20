@@ -1,10 +1,8 @@
 from fastapi import APIRouter, Body, Depends
-from typing import List
-
 from app.api.users.schemas import CreateUserSchema, UserSchema
-from app.api.users.models import User as user_model
 from app.api.users.dao import UserDAO
 from app.api.auth.services import AuthHandler
+from app.api.users.services import UserService
 
 router = APIRouter()
 
@@ -12,26 +10,20 @@ router = APIRouter()
 @router.post('', response_model=UserSchema)
 async def register_new_user(
     payload: CreateUserSchema = Body(),
-    user_dao: UserDAO = Depends(),
-    auth_handler: AuthHandler = Depends()
+    user_service: UserService = Depends(),
 ):
     """Processes request to register user account."""
-    payload.hashed_password = auth_handler.get_password_hash(payload.hashed_password)
-    await user_dao.create_user_model(user=payload)
-    user: user_model = await user_dao.get_user_by_email(email=payload.email)
+    user = await user_service.create_user(payload)
     return user
 
 auth_handler = AuthHandler()
 
 
-@router.get('', response_model=List[UserSchema])
-async def get_users(
-    limit: int = 10,
-    offset: int = 0,
-    user_dao: UserDAO = Depends(),
-    user_id=Depends(auth_handler.auth_wrapper)
+@router.get('', response_model=UserSchema)
+async def get_user_profile(
+    user_service: UserService = Depends(),
+    user_id: int = Depends(auth_handler.auth_wrapper),
 ):
-    """Processes request to get all users."""
-    print(user_id)
-    users = await user_dao.get_all_users(limit=limit, offset=offset)
-    return users
+    """Processes request to get user profile."""
+    user = await user_service.get_user_profile(user_id=user_id)
+    return user

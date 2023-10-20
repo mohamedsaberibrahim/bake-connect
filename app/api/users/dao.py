@@ -68,3 +68,16 @@ class UserDAO:
         query = select(user_model).where(user_model.email == email)
         rows = await self.session.execute(query)
         return rows.scalars().first()
+
+    async def get_user_by_id(
+            self,
+            user_id: int) -> user_model:
+        """
+        Get specific user model.
+
+        :param user_id: id of user instance.
+        :return: user models.
+        """
+        query = select(user_model).where(user_model.id == user_id)
+        rows = await self.session.execute(query)
+        return rows.scalars().first()
