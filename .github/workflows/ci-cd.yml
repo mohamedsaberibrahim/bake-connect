@@ -36,7 +36,7 @@ jobs:
           APP_DB_HOST: localhost
 
   build:
-    name: Build
+    name: Build & Push
     needs: [test, lint]
     runs-on: ubuntu-latest
     steps:
@@ -64,6 +64,9 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
     - name: 'auth'
       uses: 'google-github-actions/auth@v1'
       with:
@@ -74,7 +77,6 @@ jobs:
       with:
         cluster_name: 'bake-connect-cluster'
         location: 'europe-west9-c'
-        credentials_json: '${{ secrets.GCR_JSON_KEY }}'
     - name: 'kubectl apply'
       run: |
-        kubectl set image deployment/bake-connect bake-connect=eu.gcr.io/bake-connect/app:${{ github.sha }}
+        kubectl set image deployment/bake-connect bake-connect-container=eu.gcr.io/bake-connect/app:${{ github.sha }}

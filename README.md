@@ -70,7 +70,7 @@ Bake & Connect implementation raodmap steps starting from delivering a minimum v
 - [ ] Making development cycle easier
   - [x] Add linting configurations
   - [ ] Covering all modules with unit tests
-  - [ ] Adding CI/CD pipeline
+  - [x] Adding simple CI/CD pipeline
   - [ ] Introducing testing environment besides production environment
   - [ ] Any refactoring is needed here?
   - [ ] Adding documentation for all endpoints
