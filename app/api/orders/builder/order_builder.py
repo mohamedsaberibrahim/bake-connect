@@ -32,11 +32,11 @@ class Builder:
     def set_tracking_number(self) -> None:
         self.tracking_number = str(randint(10000, 99999))
 
-    def set_start_baking_at(self) -> None:
-        self.start_baking_at = datetime.now().isoformat()
+    def set_start_baking_at(self, start_baking_time) -> None:
+        self.start_baking_at = start_baking_time
 
-    def set_finish_baking_at(self) -> None:
-        self.finish_baking_at = datetime.now().isoformat()
+    def set_finish_baking_at(self, finish_baking_at) -> None:
+        self.finish_baking_at = finish_baking_at
 
     def get_order(self) -> order_model:
         return order_model(

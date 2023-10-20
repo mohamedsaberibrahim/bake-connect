@@ -37,8 +37,8 @@ class OrderService:
         self.builder.set_created_at()
         self.builder.set_updated_at()
         self.builder.set_tracking_number()
-        self.builder.set_start_baking_at()
-        self.builder.set_finish_baking_at()
+        self.builder.set_start_baking_at(payload.start_baking_at)
+        self.builder.set_finish_baking_at(payload.finish_baking_at)
         return self.builder.get_order()
 
     async def update_order_state(

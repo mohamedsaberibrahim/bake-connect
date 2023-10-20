@@ -6,6 +6,8 @@ class OrderBaseSchema(BaseModel):
     payment_method: str
     bakery_id: int
     product_id: int
+    start_baking_at: str
+    finish_baking_at: str
 
 
 class OrderStatus(Enum):
@@ -23,8 +25,6 @@ class OrderCreateSchema(OrderBaseSchema):
     created_at: str
     updated_at: str
     tracking_number: str
-    start_baking_at: str
-    finish_baking_at: str
 
 
 class OrderSchema(OrderBaseSchema):

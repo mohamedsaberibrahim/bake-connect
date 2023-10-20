@@ -5,7 +5,6 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.db.dependencies import get_db_session
 from app.api.users.models import User as user_model
-from app.api.users.schemas import CreateUserSchema
 
 
 class UserDAO:
@@ -14,17 +13,13 @@ class UserDAO:
     def __init__(self, session: AsyncSession = Depends(get_db_session)):
         self.session = session
 
-    async def create_user_model(self, user: CreateUserSchema) -> None:
+    async def create_user_model(self, user: user_model) -> None:
         """
         Add single user to session.
 
         :param name: name of a user.
         """
-        self.session.add(user_model(name=user.name,
-                                    email=user.email,
-                                    hashed_password=user.hashed_password,
-                                    role=user.role.value
-                                    ))
+        self.session.add(user)
 
     async def get_all_users(self, limit: int, offset: int) -> List[user_model]:
         """
