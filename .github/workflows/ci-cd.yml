@@ -57,4 +57,24 @@ jobs:
           tags: |
             eu.gcr.io/bake-connect/app:latest
             eu.gcr.io/bake-connect/app:${{ github.sha }}
-  
+
+  deploy:
+    name: Deploy
+    if: github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: 'auth'
+      uses: 'google-github-actions/auth@v1'
+      with:
+        credentials_json: '${{ secrets.GCR_JSON_KEY }}'
+
+    - name: 'get-credentials'
+      uses: 'google-github-actions/get-gke-credentials@v1'
+      with:
+        cluster_name: 'bake-connect-cluster'
+        location: 'europe-west9-c'
+        credentials_json: '${{ secrets.GCR_JSON_KEY }}'
+    - name: 'kubectl apply'
+      run: |
+        kubectl set image deployment/bake-connect bake-connect=eu.gcr.io/bake-connect/app:${{ github.sha }}
